@@ -1,0 +1,6 @@
+Distributed-computing: S8CST402
+Soft-computing: S8CST444
+Data-Compression-Techniques: S8CST446
+Blockchain-technologies: S8CST428
+Comprehensive-course-viva: S8CST404
+Project-phase-2: S8CST404
