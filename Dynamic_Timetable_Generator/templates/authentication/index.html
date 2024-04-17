@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon_io/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+            <script src="{% static 'js/myScript.js' %}"></script>
+            <script src="https://unpkg.com/scrollreveal"></script>
+        </head>
+        <body>
+
+            <!-- Nav bar begins -->
+                <nav>
+                    <!-- Left nav begins-->
+                        <div class="left_nav">
+                            <a href="#section-01"><img src="{% static 'img/Group 1.png' %}"></a>
+                        </div>
+                    <!-- Left nav ends -->
+
+                    <!-- Right nav begins-->
+                        <div class="right_nav">
+                            <a href="#section-01">HOME</a>
+                            <a href="#section-02">ABOUT US</a>
+                            <a href="#section-03">CONTACT US</a>
+                        </div>
+                    <!-- Right nav ends-->
+                </nav>
+            <!-- Nav bar ends -->
+
+
+            <!-- Section-01 begins -->
+                <section id="section-01" class="section-01">
+
+                    <img src="{% static 'img/Home.png' %}" alt="Background Image"> <!-- Background image -->
+
+                    <!-- Binded-01 begins-->
+                        <div class="binded">
+
+                            <!-- Container-01 begins-->
+                                <div class="container reveal">
+
+                                    <h1>DYNAMIC<br><b>TIMETABLE</b><br> GENERATOR</h1> <!-- Website Title -->
+
+                                    <div class="tagline">
+                                        <p>Timetable redefined,<br> personlaized for you</p>  <!-- Website tagline -->
+                                    </div>
+
+                                    <div class="login">
+                                        <hr class="hr1">  <!-- Horizontal line 1 -->
+
+                                        <div class="btn-container">
+
+                                            <button>
+                                                <a href="/login">LOG IN</a> <!-- Login button -->
+                                            </button>
+
+                                            <h3>OR</h3>  <!-- OR -->
+
+                                            <button>
+                                                <a href="/register">REGISTER</a>  <!--Register button -->
+                                            </button>
+
+                                        </div>
+
+                                        <hr class="hr2"> <!-- Horizontal line 2 -->
+                                    </div>
+                                
+                                </div>
+                            <!-- Container-01 endss--> 
+
+                        </div>
+                    <!-- Binded-01 ends-->
+                </section>
+            <!-- Section-01 ends -->
+
+       
+            <!-- Section-02 begins-->
+                <section id="section-02" class="section-02">
+                    
+                    <!-- Binded-02 begins -->
+                        <div class="binded">
+
+                            <!-- Container-02 begins-->
+                                <div class="container reveal">
+
+                                    <div class="title">
+                                        <h1>ABOUT</h1>  <!--About us title-->
+                                        <h1 class="us">US</h1>
+                                    </div>
+
+                                    <div class="about">  <!-- About us content-->
+                                        <p>In the realm of higher education, the demand for efficient timetable management has become increasingly pronounced. The <mark>Dynamic Timetable Generator</mark> project aims to address this need through the implementation of scheduling algorithms. In an era where educational institutions are grappling with resource optimization, the project offers a comprehensive solution to streamline the process of timetable creation.</p>
+                                    </div>
+                                    
+                                </div>
+                            <!-- Container-02 endss-->
+                            
+                        </div>  
+                    <!-- Binded-02 ends -->
+                </section>
+            <!-- Section-02 ends -->
+
+
+            <!-- Section-03 begins -->
+                <section id="section-03" class="section-03">
+
+                    <!-- Binded-03 begins-->
+                        <div class="binded">
+
+                            <!-- Container-03 begins -->
+                                <div class="container reveal">
+                                    <div class="title">
+                                        <h1>CONTACT</h1>  <!--cONTACT us title-->
+                                        <h1 class="us">US</h1>
+                                    </div>
+                                
+                                    <div class="address">
+                                        <h2>Address</h2> <!-- Address section-->
+                                        <p>Lorem ipsum dolor sit<br>
+                                            amet consectetur <br>
+                                            adipisicing elit.</p>
+                                    </div>
+
+                                    <div class="support">
+                                        <h2>Support</h2> <!-- Mobile numeber and email-->
+                                        <p>+91 XXXXX XXXXX</p>
+                                        <P>hello@dynamictt.com</P>
+                                    </div>
+                                </div>
+                            <!-- Container-03 ends -->
+                        </div>
+                    <!-- Binded-03 ends-->
+                </section>
+            <!-- Section-03 ends -->
+
+            <!-- Section-04 starts-->
+                <section class="section-04">
+                    <img src="{% static 'img/Home.png' %}">
+                </section>
+            <!-- Section-04 ends-->
+
+            <!-- Footer starts -->
+                <footer>
+
+                    <!-- Top footer begins -->
+                        <div class="top_footer">
+
+                            <!-- Left footer begins -->
+                                <div class="left_footer">
+                                    <img src="{% static 'img/Group 1.png' %}" alt="logo">
+                                    <p class="title">DYNAMIC TIMETABLE GENERATOR</p>
+                                </div>
+                            <!-- Left footer ends -->
+
+                            <!-- Right footer begins-->
+                                <div class="right_footer">
+                                    <a href="#section-01">HOME</a>
+                                    <a href="#section-02">ABOUT US</a>
+                                    <a href="#section-03">CONTACT US</a>
+                                </div>
+                            <!-- Right footer ends-->
+                        </div>
+                    <!-- Top footer ends -->
+
+                    <hr> <!-- Horizontal line 3-->
+
+                    <!-- Bottom footer begins-->
+                        <div class="bottom_footer">
+                            <p>&copy;2024 THE DYNAMIC TIMETABLE GENERATOR</p>
+                        </div>
+                    <!-- Bottom footer ends-->
+                </footer>
+            <!-- Footer ends -->
+                
+
+            <script>
+                ScrollReveal({
+                    reset: true,
+                    distance: '60px',
+                    duration: 2500,
+                    delay:400
+                });
+                
+
+                ScrollReveal().reveal('.section-01 .container', {delay: 100})
+                ScrollReveal().reveal('.section-02 .container', {delay: 50})
+                ScrollReveal().reveal('.section-03 .container', {delay: 50})
+                
+            </script>
+        </body>
+</html>
