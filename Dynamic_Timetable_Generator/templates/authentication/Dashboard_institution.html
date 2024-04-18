@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="./favicon_io/favicon.ico">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Dashboard_styles.css' %}">
+        </head>
+        <body>
+
+            <img src="{% static 'img/Dashboard - Institution.jpg' %}" alt="background-image" id="background-img">
+            <!-- Nav bar begins -->
+                <nav>
+                    <!-- Left nav begins-->
+                        <div class="left_nav">
+                            <a href="Dashboard_institution.html"><img src="{% static 'img/Group 1.png' %}"></a>
+                        </div>
+                    <!-- Left nav ends -->
+
+                    <!-- Right nav begins-->
+                        <div class="right_nav">
+                            <a href="#">TIMETABLE</a>
+                            <a href="#">WORKSPACE</a>
+                            <a href="#">PROFILE</a>
+                            <a href="/logout/">LOG OUT</a>
+                        </div>
+                    <!-- Right nav ends-->
+                </nav>
+            <!-- Nav bar ends -->
+
+            <!-- Section-01 begins -->
+                <section class="section-01">
+
+                        <h1>Let's get things done!</h1>
+
+                </section>
+            <!-- Section-01 ends-->
+        </body>
+    </html>
