@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Dynamic TimeTable Generator</title>
+
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/register_style.css' %}">
+    </head>
+    <body>
+        <!-- Section-01 begins-->
+            <section class="section-01">
+                
+                <!-- Binded-01 begins -->
+                    <div class="binded">
+
+                        <!-- Left-Container begins-->
+                            <div class="left-container">
+                                <div class="title-greet"> <!-- Side greeting -->
+                                    <h1>Hey,</h1>
+                                    <h2>Campus Incharge!</h2>
+                                </div>
+
+                                <div class="image"> <!-- Background image -->
+                                    <div class="glassmorphic"></div> <!-- Transparent -->
+                                    <img src="{% static 'img\Institution.jpeg' %}" alt="Institution image">
+                                </div>
+                            </div>
+                        <!-- Left-Container ends-->
+
+                        <!-- Right-Container begins -->
+                            <div class="right-container">
+
+                                <div class="container-spiral"> <!-- Background spirals -->
+                                    <div class="spiral-01"></div> <!-- Background Circle - 01 -->
+                                    <div class="spiral-02"></div> <!-- Background Circle - 02 -->
+                                    <div class="spiral-03"></div> <!-- Background Circle - 03 -->
+                                </div>
+
+                                <div class="title-account-creation"> <!-- Account creation title-->
+                                    <h2>Create an account</h2>
+                                    <h3>Let's get started.....</h3>
+                                </div>
+
+                                <!-- Form begins -->
+                                <form class="form-container" action="/authentication/register_institution/" target="_blank" method="post" autocomplete="on"> 
+                                    {% csrf_token %}
+                                    <label for="uname">Username</label>  <!-- Username -->
+                                    <br>
+                                    <input type="text" id="uname" name="username" autofocus required>
+                                    <br>
+
+                                    <label for="fname">First Name</label>  <!-- First Name -->
+                                    <br>
+                                    <input type="text" id="fname" name="firstname" required>
+                                    <br>
+
+                                    <label for="lname">Last Name</label>  <!-- Last Name -->
+                                    <br>
+                                    <input type="text" id="lname" name="lastname" required>
+                                    <br>
+
+                                    <label for="email">Email</label>  <!-- Email -->
+                                    <br>
+                                    <input type="email" id="email" name="mailid" required>
+                                    <br>
+
+                                    <label for="password">Password</label>  <!-- Password -->
+                                    <br>
+                                    <input type="password" id="password" name="pwd" min="8" required>
+                                    <br>
+
+                                    <label for="cpassword">Confirm Password</label>  <!-- Confirm Password -->
+                                    <br>
+                                    <input type="password" id="cpassword" name="cpwd" min="8" required>
+                                    <br>
+
+                                    <button type="submit">Create Account</button> <!-- Create account button-->
+                                </form>
+                            <!-- Form ends -->
+
+                            </div>
+                        <!-- Right-Container- ends -->
+
+                    </div>
+                <!-- Binded-01 ends -->
+
+            </section>
+        <!-- Section-01 ends-->
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timetable Generator</title>
+<link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .input-cell input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+    <h2>Timetable</h2>
+    <table id="timetable">
+        
+        <!-- This is where the timetable rows with input fields will be dynamically added -->
+        <tr>
+            <td id="time" >Monday</td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+	    <td class="input-cell"></td>
+
+        </tr>
+        <tr>
+            <td id="time" >Tuesday</td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+	    <td class="input-cell"></td>
+
+        </tr>
+        <tr>
+            <td id="time" >Wednesday</td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+	    <td class="input-cell"></td>
+
+        </tr>
+        <tr>
+            <td id="time" >Thursday</td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+	    <td class="input-cell"></td>
+
+        </tr>
+        <tr>
+            <td id="time" >Friday</td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+            <td class="input-cell"></td>
+	    <td class="input-cell"></td>
+
+        </tr>
+	
+
+        <!-- More rows can be added similarly -->
+
+    </table>
+    <button onclick="window.print()">PRINT</button>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Create_courses.css' %}">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="{% static 'js/formdata.js' %}"></script>
+
+            
+        <body>
+            <!-- Section-01 begins-->
+            <div class="section-01">
+                <!-- Binded-01 begins-->
+                    <div class="binded">
+                        <img src="{% static 'img/green_blobs.jpg' %}">
+                        <!-- Container-01 begins -->
+                            <div class="container">
+
+                                <!-- Top-Container begins-->
+                                    <div class="top-container">
+                                        <div class="title-greet"> <!-- Side greeting -->
+                                            <h1>COURSES</h1>
+                                            <h2 id="dept_name">{{department.name}}</h2>
+                                        </div>
+                                    </div>
+                                <!-- Top-Container ends-->
+
+
+                                <!-- Bottom-Container begins -->
+                                    <div class="bottom-container">
+                                        <div class="coursedata_container">
+                                            {% for course in courses %}
+                                            <div class="course_info">
+                                                <h2>{{course.courseName}}</h2><br>
+
+                                                <a href='{% url "update_courses" course.id %}'>Edit</a>
+                                                <a href='{% url "delete_courses" course.id %}' >Delete</a>
+
+                                                <br>
+                                                <br>
+                                                
+                                                <h3>Updated {{course.updated|timesince}} ago</h3>
+                                                <h3>Created {{course.created|timesince}} ago</h3>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Form begins -->
+                                            <form class="form-container" action="" target="_self" method="post" autocomplete="on" id="form4"> 
+                                                {% csrf_token %}
+                                                <div id="courseData">
+                                                    <!-- Course Data Template -->
+                                                </div>
+                                                <button type="button" id="addCourse">Add Course</button>
+                                                <button type="submit" onclick="" id="submit" value="submit">Save</button> 
+
+                                            </form>
+                                        <!-- Form ends -->
+                                    </div>
+                                <!-- Bottom-Container ends-->
+                                <button id="backbutton" onclick="window.location.href='{{ request.META.HTTP_REFERER }}'">Go Back</button>
+
+                            </div>
+                        <!-- Container-01 ends -->
+
+                    </div>
+                <!-- Binded-01 ends-->
+
+            </div>
+        <!-- Section-01 ends-->
+
+            <script>
+                function getCookie(name) 
+                {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== '') 
+                    {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) 
+                        {
+                            var cookie = jQuery.trim(cookies[i]);
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) 
+                            {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                document.getElementById('addCourse').addEventListener('click', function() {
+                    var courseData = document.getElementById('courseData');
+                    var courseEntry = document.createElement('div');
+                    courseEntry.className = 'courseEntry';
+                    courseEntry.innerHTML = `
+                    <label for="course_name">Course Name:</label>
+                    <input type="text" name="course_name[]" id="course_name" required>
+                    <label for="course_code">Course Code:</label>
+                    <input type="text" name="course_code[]" id="course_code" required>
+                    <label for="section">Type:</label>
+                    <select name="section[]" id="section" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="T">OS Lab</option>
+                        <option value="S">Digital Lab</option>
+                        <option value="Minor">Minor</option>
+                        <option value="Honours">Honours</option>
+                        <option value="D-Elective1">D-Elective1</option>
+                        <option value="B-Elective3">B-Elective3</option>
+                        <option value="C-Elective4">C-Elective4</option>
+                        <option value="D-Elective5">D-Elective5</option>
+                        <option value="U">U</option>
+                    </select><br>
+                    <label for="allotted_batch">Allotted Batch:</label>
+                    <select name="allotted_batch[]" id= "allotted_batch " required>
+                        <option value="" disabled selected>Select Batch</option>
+                        <option value="S2D">S2D</option>
+                        <option value="S4D">S4D</option>
+                        <option value="S6D">S6D</option>
+                        <option value="S8D">S8D</option>
+                        <option value="S2C">S2C</option>
+                        <option value="S4C">S4C</option>
+                        <option value="S6C">S6C</option>
+                        <option value="S8C">S8C</option>
+                    </select>
+                    
+                    <hr>
+                    `;
+                    courseData.appendChild(courseEntry);
+                });
+
+                
+
+            
+            </script>
+        </body>
+    </html>

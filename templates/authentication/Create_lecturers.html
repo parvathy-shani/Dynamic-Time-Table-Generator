@@ -1,0 +1,173 @@
+{% load static %}
+
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Create_lecturers.css' %}">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="{% static 'js/formdata.js' %}"></script>
+
+        </head> 
+        <body>
+            <!-- Section-01 begins-->
+            <section class="section-01">
+                <!-- Binded-01 begins-->
+                    <div class="binded">
+                        <img src="{% static 'img/green_blobs.jpg' %}">
+                        <!-- Container-01 begins -->
+                            <div class="container">
+
+                                <!-- Top-Container begins-->
+                                    <div class="top-container">
+                                        <div class="title-greet"> <!-- Side greeting -->
+                                            <h1>LECTURERS</h1>
+                                            <h1 id="dept_name">{{department.name}}</h1>
+                                        </div>
+                                    </div>
+                                <!-- Top-Container ends-->
+
+
+                                <!-- Bottom-Container begins -->
+                                    <div class="bottom-container">
+                    
+                                            <div class="lecturerdata_container">
+                                                {% for lecturer in lecturers %}
+                                                <div class="lecturer_info">
+                                                    <h2>{{lecturer.lecturerName}}</h2><br>
+    
+                                                    <a href='{% url "update_lecturers" lecturer.id %}'>Edit</a>
+                                                    <a href='{% url "delete_lecturers" lecturer.id %}' >Delete</a>
+    
+                                                    <br>
+                                                    <br>
+                                                    
+                                                    <h3>Updated {{lecturer.updated|timesince}} ago</h3>
+                                                    <h3>Created {{lecturer.created|timesince}} ago</h3>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        <!-- Form begins -->
+                                            <form class="form-container" action="" target="_self" method="post" autocomplete="on" id="form3"> 
+                                                {% csrf_token %}
+                                                <div id="lecturer">
+                                                    <!-- Lecturer Data Template -->
+                                                    <div class="lecturerEntry">           
+                                                    </div>
+                                                </div>
+                                                <button type="button" id="addLecturer">Add Lecturer</button>
+                                                <button type="submit" onclick="" id="submit" value="submit">Save</button> 
+
+                                            </form>
+                                        <!-- Form ends -->
+                                    </div>
+                                <!-- Bottom-Container ends-->
+                                <button id="backbutton" onclick="window.location.href='{{ request.META.HTTP_REFERER }}'">Go Back</button>
+
+                                
+                            </div>
+                        <!-- Container-01 ends -->
+
+                    </div>
+                <!-- Binded-01 ends-->
+
+            </section>
+        <!-- Section-01 ends-->
+
+            <script>
+                function getCookie(name) 
+                {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== '') 
+                    {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) 
+                        {
+                            var cookie = jQuery.trim(cookies[i]);
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) 
+                            {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+
+                document.getElementById('addLecturer').addEventListener('click', function() 
+                {
+                    var lecturerData = document.getElementById('lecturer');
+                    var lecturerEntry = document.createElement('div');
+                    lecturerEntry.className = 'lecturerEntry';
+                    lecturerEntry.innerHTML = `
+                        <label for="name">Lecturer Name:</label>
+                        <input type="text" name="lecturerName[]" required>
+                        <label for="position">Position:</label>
+                        <select name="lecturerPosition[]" required>
+                            <option value="" disabled selected>Select Position</option>
+                            <option value="Assistant Professor">Assistant Professor</option>
+                            <option value="Associate Professor">Associate Professor</option>
+                            <option value="Professor">Professor</option>
+                        </select>
+                        <label for="preferred_timeslot">Preferred Timeslot:</label>
+                        <select name="preferredTimeslot[]" required>
+                            <option value="" disabled selected>Select Timeslot</option>
+                            <option value="Afternoon">Afternoon</option>
+                            <option value="Forenoon">Forenoon</option>
+                            <option value="NIL">NIL</option>
+                        </select>
+                    `;
+                    lecturerData.appendChild(lecturerEntry);
+                });
+            
+                document.getElementById('submit').addEventListener('click', function() {
+                fetchData();  // Call the fetchData function on button click
+                });
+                
+                function fetchData() 
+                {
+                    var lecturerInfo = [];
+                    var lecturerNames = document.getElementsByName("lecturerName[]");
+                    var lecturerPositions = document.getElementsByName("lecturerPosition[]");
+                    var preferredTimeslots = document.getElementsByName("preferredTimeslot[]");
+
+                    for (var i = 0; i < lecturerNames.length; i++) 
+                    {
+                        var lecturer = {
+                            "name": lecturerNames[i].value,
+                            "position": lecturerPositions[i].value,
+                            "preferred_timeslot": preferredTimeslots[i].value
+                        };
+                        lecturerInfo.push(lecturer);
+                    }
+
+                    var lecturers = {
+                        "lecturer": [],
+                        "position": [],
+                        "preferred_timeslot": []
+                    };
+
+                    // Separate the data into respective arrays in jsondata
+                    for (var j = 0; j < lecturerInfo.length; j++) {
+                        lecturers["lecturer"].push(lecturerInfo[j]["name"]);
+                        lecturers["position"].push(lecturerInfo[j]["position"]);
+                        lecturers["preferred_timeslot"].push(lecturerInfo[j]["preferred_timeslot"]);
+                    }
+
+                    data = {lecturer_data : lecturers}
+
+                    console.log(data); 
+                    
+                    formDataLecturers.push(data);
+
+                    console.log("formDataTimeslots after pushing:", formDataLecturers);
+                }
+
+            </script>
+        </body>
+    </html>

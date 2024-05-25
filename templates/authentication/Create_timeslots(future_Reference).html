@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Dynamic TimeTable Generator</title>
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/Timeslots.css' %}">
+        <script src="{% static 'js/formdata.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head> 
+    <body>
+        <!-- Section-01 begins-->
+        <section class="section-01">
+
+            <!-- Binded-01 begins-->
+                <div class="binded">
+                    <img src="{% static 'img/green_blobs.jpg' %}">
+                    <!-- Container-01 begins -->
+                        <div class="container">
+                            <!-- Top-Container begins-->
+                                <div class="top-container">
+                                    <div class="title-greet"> <!-- Side greeting -->
+                                        <h1>TIMESLOTS</h1>
+                                    </div>
+                                </div>
+                            <!-- Top-Container ends-->
+
+                            <!-- Bottom-Container begins -->
+                                <div class="bottom-container">
+                                    <!-- Form begins -->
+                                        <form class="form-container" action="" target="_self" method="post" autocomplete="on" id="form1"> 
+                                            {% csrf_token %} 
+                                            <div class="basic_data">  
+                                                <!-- Days Per Week -->
+                                                    <label for="daysPerWeek">Days Per Week:</label>
+                                                    <br>
+                                                    <select id="daysPerWeek" name="daysPerWeek" required>
+                                                        <option value="" disabled selected>No of days</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                    </select>
+                                                    <br>
+
+                                                    <!-- Hours Per Day -->
+                                                        <label for="hoursPerDay">Timeslots Per Day:</label>
+                                                        <br>
+                                                        <select id="hoursPerDay" name="hoursPerDay" required>
+                                                            <option value="" disabled selected>No of hours</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                        </select>
+                                                        <br>
+                                            </div>
+
+                                                    <!-- Hourly Schedule -->
+                                                        <div class="hourlySchedule" id="hourlySchedule"></div>
+
+                                                        <button type="button" id="submit">Save</button> 
+                                            
+                                        </form>
+                                    <!-- Form ends -->
+                                </div>
+                            <!-- Bottom-Container ends-->
+                            
+                        </div>
+                    <!-- Container-01 ends -->
+
+                </div>
+            <!-- Binded-01 ends-->
+
+        </section>
+    <!-- Section-01 ends-->
+
+        <script>
+            function getCookie(name) 
+            {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') 
+                {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) 
+                    {
+                        var cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) 
+                        {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            document.getElementById('daysPerWeek').addEventListener('change', function() 
+            {
+                updateHourlySchedule();
+            });
+        
+            document.getElementById('hoursPerDay').addEventListener('change', function() 
+            {
+                updateHourlySchedule();
+            });
+        
+            function updateHourlySchedule() 
+            {
+                var daysPerWeek = parseInt(document.getElementById('daysPerWeek').value);
+                var hoursPerDay = parseInt(document.getElementById('hoursPerDay').value);
+        
+                if (daysPerWeek < 1 && hoursPerDay < 1)
+                {
+                    alert('Please select the number of days per week and timeslots per day!');
+                    return;
+                }
+        
+                var hourlySchedule = document.getElementById('hourlySchedule');
+                hourlySchedule.innerHTML = ""; // Clear existing content
+                var day = 0;
+                for (var i = 0; i < daysPerWeek; i++) 
+                {
+                    var timeslotEntry = document.createElement('div');
+                    timeslotEntry.className = 'timeslot';
+                    timeslotEntry.innerHTML = `
+                    <hr style="border-color: #EBFBB0">
+                        <label for="day">Day:</label>
+                        <select class="day" name="day[]" id="day${i+1}" required>
+                            <option value="" disabled selected>Select day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                        <br>
+                    `;
+        
+                    for (var j = 0; j < hoursPerDay; j++) 
+                    {
+                        var timeslotHeader = document.createElement('span');
+                        timeslotHeader.style.display = 'inline-block';
+                        timeslotHeader.style.marginRight = '100px'; // Adjust margin as needed
+                        timeslotHeader.textContent = 'Timeslot ' + (j + 1); // Display timeslot number
+                        timeslotEntry.appendChild(timeslotHeader);
+
+                        var startHourLabel = document.createElement('label');
+                        startHourLabel.textContent = 'Start Time:';
+                        var startHourInput = document.createElement('input');
+                        startHourInput.type = 'time';
+                        startHourInput.className = 'startHour';
+                        startHourInput.name = 'startHour[]';
+                        startHourInput.required = true;
+                        startHourInput.id = `day${i+1}start${j+1}`
+        
+                        var endHourLabel = document.createElement('label');
+                        endHourLabel.textContent = 'End Time:';
+                        var endHourInput = document.createElement('input');
+                        endHourInput.type = 'time';
+                        endHourInput.className = 'endHour';
+                        endHourInput.name = 'endHour[]';
+                        endHourInput.required = true;
+                        endHourInput.id = `day${i+1}end${j+1}`
+        
+                        timeslotEntry.appendChild(startHourLabel);
+                        timeslotEntry.appendChild(startHourInput);
+                        timeslotEntry.appendChild(endHourLabel);
+                        timeslotEntry.appendChild(endHourInput);
+                        timeslotEntry.appendChild(document.createElement('br'));
+                    }
+        
+                    hourlySchedule.appendChild(timeslotEntry);
+                }
+            }
+
+            
+
+            $(document).ready(function() {
+            $('#submit').click(function() {
+                // Fetch and store the data in JSON format
+                var formData = fetchData();
+
+                // Send the data to the server using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "workspace_institution" %}',
+                    data: {
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',  // Include CSRF token
+                        'timeslots_data_json': JSON.stringify(formData)  // Convert JSON data to string
+                    },
+                    success: function(response) {
+                        // Handle success response (if needed)
+                        console.log('Data sent successfully!');
+                        console.log(response);  // Log the response from the server
+
+                        window.location.href = '{% url "workspace_institution" %}';  // Replace '/new-page-url' with your actual URL
+                    },
+                    error: function(xhr, errmsg, err) {
+                        // Handle error response (if needed)
+                        console.log('Error sending data:', errmsg);
+                    }
+                });
+            });
+        });
+
+        </script>
+    </body>
+</html>

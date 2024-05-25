@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamic TimeTable Generator</title>
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/Department_data.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="section-01">
+        <div class="binded">
+            <img src="{% static 'img/Green_blobs.jpg' %}">
+
+            <div class="container">
+                <!-- Top-Container begins-->
+                <div class="top-container">
+                    <div class="title-greet"> <!-- Side greeting -->
+                        <h1 id="h1tag">{{department.name}}</h1>
+                    </div>
+                </div>
+                <!-- Top-Container ends-->
+                <div class="input">
+                    <div class="input-container">
+                        <a href="{% url 'create_timeslots' department.id %}">TIMESLOTS</a><br>
+                    </div>
+    
+                    <div class="input-container">
+                        <a href="{% url 'create_rooms' department.id %}">ROOMS</a><br>
+                    </div>
+                    
+                    <div class="input-container">
+                        <a href="{% url 'create_lecturers' department.id %}">LECTURERS</a><br>
+                    </div>
+                    
+                    <div class="input-container">
+                        <a href="{% url 'create_courses' department.id %}">COURSES</a><br>
+                    </div>
+                </div>
+        
+    
+                <input type="button" value="Generate Timetable" onclick="submitAllData()">
+                <button id="backbutton" onclick="window.location.href='{% url 'workspace_institution' %}'">Go Back</button>
+
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function submitAllData() {
+            const csrftoken = getCookie('csrftoken');
+
+            fetch('{% url "generator" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                // Include your request body here if needed
+                // body: JSON.stringify(your_data_object)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle response data as needed
+                // Redirect to timetable_data_sample with the response data
+                window.location.href = '{% url "timetable_data_sample" %}';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    
+    </script>
+</body>
+</html>

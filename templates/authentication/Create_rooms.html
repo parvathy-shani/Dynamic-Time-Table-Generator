@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Create_rooms.css' %}">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="{% static 'js/formdata.js' %}"></script>
+
+        </head> 
+        <body>
+            <!-- Section-01 begins-->
+            <section class="section-01">
+                <!-- Binded-01 begins-->
+                    <div class="binded">
+                        <img src="{% static 'img/green_blobs.jpg' %}">
+                        <!-- Container-01 begins -->
+                            <div class="container">
+
+                                <!-- Top-Container begins-->
+                                    <div class="top-container">
+                                        <div class="title-greet"> <!-- Side greeting -->
+                                            <h1>ROOMS</h1>
+                                            <h1 id="h1tag">{{department.name}}</h1>
+                                        </div>
+                                    </div>
+                                <!-- Top-Container ends-->
+
+
+                                <!-- Bottom-Container begins -->
+                                    <div class="bottom-container">
+                                      
+                                        <div class="roomdata_container">
+                                            {% for room in rooms %}
+                                            <div class="room_info">
+                                                <h2>{{room.roomName}}</h2><br>
+
+                                                <a href='{% url "update_rooms" room.id %}'>Edit</a>
+                                                <a href='{% url "delete_rooms" room.id %}' >Delete</a>
+
+                                                <br>
+                                                <br>
+                                                
+                                                <h3>Updated {{room.updated|timesince}} ago</h3>
+                                                <h3>Created {{room.created|timesince}} ago</h3>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Form begins -->
+                                            <form class="form-container" action="" target="_self" method="post" autocomplete="on" id="form2">  
+                                                {% csrf_token %}
+                                                <div id="classrooms_data">
+                                                    <!-- Room Data Template -->
+                                                    <div class="roomEntry"></div>
+                                                 </div>       
+                                                <button type="button" id="addRoom">Add Room</button>
+                                                <button type="submit" onclick="" id="submit" value="submit">Save</button> 
+
+
+                                            </form>
+                                        <!-- Form ends -->
+                                    </div>
+                                <!-- Bottom-Container ends-->
+                                <button id="backbutton" onclick="window.location.href='{{ request.META.HTTP_REFERER }}'">Go Back</button>
+
+                            </div>
+                        <!-- Container-01 ends -->
+
+                    </div>
+                <!-- Binded-01 ends-->
+
+            </section>
+        <!-- Section-01 ends-->
+
+        <script>
+            
+        
+            document.getElementById('addRoom').addEventListener('click', function() {
+                var roomData = document.getElementById('classrooms_data');
+                var roomEntry = document.createElement('div');
+                roomEntry.className = 'roomEntry';
+                roomEntry.innerHTML = `
+                    <label for="room_name">Room Name:</label>
+                    <input type="text" name="roomName[]" required>
+                    
+                    <label for="allotted_batch">Allotted Batch:</label>
+                    <select name="allotted_batch[]" required>
+                        <option value="" disabled selected>Select Batch</option>
+                        <option value="S2D">S2D</option>
+                        <option value="S4D">S4D</option>
+                        <option value="S6D">S6D</option>
+                        <option value="S8D">S8D</option>
+                        <option value="S2C">S2C</option>
+                        <option value="S4C">S4C</option>
+                        <option value="S6C">S6C</option>
+                        <option value="S8C">S8C</option>
+                    </select>
+        
+                    <label for="purpose">Purpose:</label>
+                    <select name="purpose[]" required>
+                        <option value="" disabled selected>Select purpose</option>
+                        <option value="mini-project">Mini Project</option>
+                        <option value="lab">Lab</option>
+                        <option value="project">Project</option>
+                        <option value="lecture">Lecture</option>
+                    </select><br>
+                `;
+                roomData.appendChild(roomEntry);
+            });
+        
+            
+        </script>
+        
+        </body>
+    </html>

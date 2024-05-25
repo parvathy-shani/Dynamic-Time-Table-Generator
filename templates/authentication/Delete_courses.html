@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic TimeTable Generator</title>
+    <link rel="icon" href="{% static 'img/favicon_io/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Delete_department.css' %}">
+</head> 
+<body>
+    <!-- Section-01 begins-->
+    <section class="section-01">
+
+        <!-- Binded-01 begins-->
+        <div class="binded">
+            <img src="{% static 'img/Green_blobs.jpg' %}">
+
+            <!-- Container-01 begins -->
+            <div class="container">
+                <!-- Top-Container begins-->
+                    <div class="top-container">
+                        <div class="title-greet"> <!-- Side greeting -->
+                            <h1>DELETE</h1>
+                            <h1>COURSES</h1>
+                        </div>
+                    </div>
+                <!-- Top-Container ends-->
+
+                <!-- Bottom-Container begins -->
+                <div class="bottom-container">
+                    <!-- Form begins -->
+                    <h3>Do you want to delete?</h3>
+
+                    <form method="post" action="" onsubmit="return confirm('Are you sure you want to delete this course?');">
+                        {% csrf_token %}
+                        <button onclick="window.location.href='{{ request.META.HTTP_REFERER }}'">Go Back</button>
+                        <button type="submit" id="submit">Delete</button>
+                    </form>
+                    
+                    <!-- Form ends -->
+                </div>
+                <!-- Bottom-Container ends-->
+
+            </div>
+
+        </div>
+        <!-- Binded-01 ends -->
+
+    </section>
+    <!-- Section-01 ends -->
+</body>
+</html>

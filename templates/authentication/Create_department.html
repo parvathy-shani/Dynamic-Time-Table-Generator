@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Deprtment_info.css' %}">
+        </head> 
+        <body>
+            <!-- Section-01 begins-->
+            <section class="section-01">
+
+                <!-- Binded-01 begins-->
+                    <div class="binded">
+                        <img src="{% static 'img/Green_blobs.jpg' %}">
+                        <!-- Container-01 begins -->
+                            <div class="container">
+                                <!-- Top-Container begins-->
+                                    <div class="top-container">
+                                        <div class="title-greet"> <!-- Side greeting -->
+                                            <h1>DEPARTMENT</h1>
+                                            <h1>INFO</h1>
+                                        </div>
+                                    </div>
+                                <!-- Top-Container ends-->
+
+                                <!-- Bottom-Container begins -->
+                                    <div class="bottom-container">
+                                        <!-- Form begins -->
+                                            <form class="form-container" action="" target="_self" method="post" autocomplete="on">
+                                                {% csrf_token %}
+
+                                                <div class="department_num">
+                                                    <label for="Dept_no">Enter the no. of departments</label>  <!-- Department no. -->
+                                                    <br>
+                                                    <input type="number" id="Dept_no" name="Dept_no" min=0 autofocus required>
+                                                    <br>
+                                                </div>
+                                                
+                                                <div class="department_name" id="departments">
+                                                </div>
+
+                                                <br>
+                                                <button type="submit" onclick="" id="submit" value="submit">Save</button> 
+                                                
+                                            </form>
+                                        <!-- Form ends -->
+                                    </div>
+                                <!-- Bottom-Container ends-->
+                                
+                            </div>
+                        <!-- Container-01 ends -->
+
+                    </div>
+                <!-- Binded-01 ends-->
+
+            </section>
+        <!-- Section-01 ends-->
+
+        <script>
+            
+
+            document.getElementById('Dept_no').addEventListener('change', function() 
+            {
+                updateDepartmentOptions();
+            });
+
+            function updateDepartmentOptions() 
+            {
+                var dept_num = parseInt(document.getElementById('Dept_no').value);
+                var department_name = document.getElementById('departments');
+                department_name.innerHTML = ""; // Clear existing options
+                for (var i = 1; i <= dept_num; i++) 
+                {
+                    var departmentEntry = document.createElement('div');
+                    departmentEntry.className = 'department';
+                    departmentEntry.innerHTML = `
+                        <label for="Dept_name">Enter department name ${i}</label>
+                        <br>
+                        <input type="text" class="Dept_name" name="Dept_name" required>
+                        <br>
+                    `;
+                    department_name.appendChild(departmentEntry);
+                }
+            }
+        </script>
+        </body>
+    </html>

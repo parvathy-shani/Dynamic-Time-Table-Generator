@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+    <html lang="en" class="no-js">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Timetable_student.css' %}">
+        </head> 
+        <body>
+            <!-- Nav bar begins -->
+            <nav>
+                <!-- Left nav begins-->
+                    <div class="left_nav">
+                        <a href="#"><img src="{% static 'img/Group 1.png' %}"></a>
+                    </div>
+                <!-- Left nav ends -->
+
+                <!-- Right nav begins-->
+                    <div class="right_nav">
+                        <a href="/authentication/timetable_student/" id="timetable">TIMETABLE</a>
+                        <a href="#">PROFILE</a>
+                        <a href="/logout/">LOG OUT</a>
+                    </div>
+                <!-- Right nav ends-->
+            </nav>
+        <!-- Nav bar ends -->
+
+            <!-- Section-01 begins-->
+                <div class="section-01">
+                    <!-- Timetable begins-->
+                    <table id="timetable_institution">
+                        <!-- This is where the timetable rows with input fields will be dynamically added -->
+                            <tr id="row1">
+                                <th id="batch">BATCH</th>
+                                <th class="input-cell" id="time1">Time1</th>
+                                <th class="input-cell" id="time2">Time2</th>
+                                <th class="input-cell" id="time3">Time3</th>
+                                <th class="input-cell" id="time4">Time4</th>
+                                <th class="input-cell" id="time5">Time5</th>
+                                <th class="input-cell" id="time6">Time6</th>
+                            </tr>
+        
+                            <tr id="row2">
+                                <th id="day1" >DAY1</th>
+                                <td class="input-cell" id="sub1">Sub1</td>
+                                <td class="input-cell" id="sub2">Sub2</td>
+                                <td class="input-cell" id="sub3">Sub3</td>
+                                <td class="input-cell" id="sub4">Sub4</td>
+                                <td class="input-cell" id="sub5">Sub5</td>
+                                <td class="input-cell" id="sub6">Sub6</td>
+                            </tr>
+        
+                            <tr id="row3">
+                                <th id="day2">DAY2</th>
+                                <td class="input-cell" id="sub1">Sub1</td>
+                                <td class="input-cell" id="sub2">Sub2</td>
+                                <td class="input-cell" id="sub3">Sub3</td>
+                                <td class="input-cell" id="sub4">Sub4</td>
+                                <td class="input-cell" id="sub5">Sub5</td>
+                                <td class="input-cell" id="sub6">Sub6</td>
+                            </tr>
+        
+                            <tr id="row4">
+                                <th id="day3">DAY3</th>
+                                <td class="input-cell" id="sub1">Sub1</td>
+                                <td class="input-cell" id="sub2">Sub2</td>
+                                <td class="input-cell" id="sub3">Sub3</td>
+                                <td class="input-cell" id="sub4">Sub4</td>
+                                <td class="input-cell" id="sub5">Sub5</td>
+                                <td class="input-cell" id="sub6">Sub6</td>
+                            </tr>
+        
+                            <tr id="row5">
+                                <th id="day4">DAY4</th>
+                                <td class="input-cell" id="sub1">Sub1</td>
+                                <td class="input-cell" id="sub2">Sub2</td>
+                                <td class="input-cell" id="sub3">Sub3</td>
+                                <td class="input-cell" id="sub4">Sub4</td>
+                                <td class="input-cell" id="sub5">Sub5</td>
+                                <td class="input-cell" id="sub6">Sub6</td>
+                            </tr>
+                        
+                            <tr id="row6">
+                                <th id="day5">DAY5</th>
+                                <td class="input-cell" id="sub1">Sub1</td>
+                                <td class="input-cell" id="sub2">Sub2</td>
+                                <td class="input-cell" id="sub3">Sub3</td>
+                                <td class="input-cell" id="sub4">Sub4</td>
+                                <td class="input-cell" id="sub5">Sub5</td>
+                                <td class="input-cell" id="sub6">Sub6</td>
+                            </tr>
+        
+                        </table>
+                <!-- Table ends-->
+                
+                    
+                
+                <div class="bottom-container">   
+                    <button id="print">Print</button>
+                </div>
+                </div>
+            <!-- Section-01 ends-->
+
+            <script>
+                const printBtn = document.getElementById('print');
+
+                printBtn.addEventListener('click', function(){
+                    print();
+                })
+            </script>
+            
+            
+        </body>
+    </html>

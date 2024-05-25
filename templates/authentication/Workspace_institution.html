@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <title>Dynamic TimeTable Generator</title>
+            <link rel="icon" href="{% static 'img/favicon.ico' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/Workspace_institution.css' %}">
+    </head>
+    <body>
+        <!-- Nav bar begins -->
+        <nav>
+            <!-- Left nav begins-->
+                <div class="left_nav">
+                    <a href="{% url 'institution' %}"><img src="{% static 'img/Group 1.png' %}"></a>
+                </div>
+            <!-- Left nav ends -->
+
+            <!-- Right nav begins-->
+                <div class="right_nav">
+                    <a href="{% url 'timetable_data_sample' %}" >TIMETABLE</a>
+                    <a href="/authentication/workspace_institution/" id="workspace">WORKSPACE</a>
+                    <!--<a href="#">PROFILE</a>-->
+                    <a href="/logout/">LOG OUT</a>
+                </div>
+            <!-- Right nav ends-->
+        </nav>
+        <!-- Nav bar ends -->
+
+        <!-- Section-01 begins-->
+        <section class="section-01">
+        
+            <!-- Binded-01 begins-->
+            <div class="binded">
+                <img src="{% static 'img/green_blobs.jpg' %}">
+                <!-- Container-01 begins -->
+                    <div class="container">
+                        {% for department in departments %}
+                            <div class="department_info">
+                                <h2><a href="{% url 'department_data' department.id %}">{{department.name}}</a></h2>
+
+                                <a href='{% url "update_department" department.id %}'>Edit</a>
+                                <a href='{% url "delete_department" department.id %}' >Delete</a>
+
+                                <br>
+                                <br>
+            
+                                <h3>Updated {{department.updated|timesince}} ago</h3>
+                                <h3>Created {{department.created|timesince}} ago</h3>
+                            </div>
+                        {% endfor %}
+                        <button onclick="window.location.href='{% url "create_department" %}'">Add department +</button>
+
+                    </div>
+                <!-- Container-01 ends -->
+            </div>
+            <!-- Binded-01 ends-->
+        </section>
+        <!-- Section-01 ends-->
+    </body>
+</html>
