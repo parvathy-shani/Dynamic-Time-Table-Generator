@@ -1,0 +1,151 @@
+body
+{
+    padding: 0;
+    margin: 0;
+    background: #EFEEEF;
+}
+
+a, h1, h2, h3, h4, h5, h6, p, strong, table
+{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+nav
+{
+    margin-top: 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color:transparent;
+}
+
+nav .left_nav
+{
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .left_nav a img
+{
+    width: 10%;
+}
+
+nav .right_nav
+{
+    width: 55%;
+    text-align: center;
+    padding-right: 8px;
+}
+
+nav .right_nav a
+{
+    margin-right: 10%;
+}
+
+nav a
+{
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 21px;
+    padding-left: 12px;
+    transition: color 0.3s ease;
+}
+
+nav .right_nav a:hover
+{
+    color: #04AB84;
+}
+
+#timetable
+{
+    background-color: rgb(219, 243, 172);
+    border-radius: 15px;
+    padding: 5px 15px 5px 15px;
+}
+
+.section-01
+{
+    height: 85vh;
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.section-01 table
+{
+    width: 85%;
+    height: 75%;
+    font-size: 25px;
+    border-spacing: 10px;
+}
+
+.section-01 th, .section-01 td
+{
+    border: 1.5px solid black;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    height: 50px;
+}
+
+#row1 th
+{
+    height: 30px;
+}
+
+.section-01 th 
+{
+    background-color: rgba(219, 243, 172, 0.5);
+    font-weight: 500;
+}
+
+
+
+#print 
+{
+    margin-top: 40px;
+    background-color: transparent;
+    color: black;
+    border: 1px black solid;
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-size: 25px;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    transition: background-color 0.3s ease;
+}
+
+#print:hover 
+{
+    background-color: #EBFBB0;
+    color: #000;
+    border: 1px #000 solid;
+}
+
+
+@media print 
+{
+    body * 
+    {
+      display: none; /* Hide all elements */
+    }
+  
+    #timetable_institution, #timetable_institution * 
+    {
+      display: inline-table; /* Display only the table and its contents */
+    }    
+}
